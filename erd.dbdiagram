@@ -1,0 +1,102 @@
+{
+  "version": "1.0.0",
+  "darkMode": true,
+  "gridEnabling": false,
+  "detailLevel": "All",
+  "tablePositions": [
+    {
+      "name": "User",
+      "schemaName": "public",
+      "x": 6.575060214920956,
+      "y": -1.5623494626976253
+    },
+    {
+      "name": "UserSocialMedia",
+      "schemaName": "public",
+      "x": 335.0957436542737,
+      "y": -57.167982259757906
+    },
+    {
+      "name": "UserMusic",
+      "schemaName": "public",
+      "x": 43.193403764204646,
+      "y": 340.28237902976775
+    },
+    {
+      "name": "Chart",
+      "schemaName": "public",
+      "x": 288.6719290390316,
+      "y": 298.2390956954051
+    },
+    {
+      "name": "UserChart",
+      "schemaName": "public",
+      "x": 344.58938827816206,
+      "y": 148.17039085659576
+    }
+  ],
+  "tableGroupCollapseStates": [],
+  "stickyNoteLayouts": [],
+  "referencePaths": [
+    {
+      "firstFieldNames": [
+        "id"
+      ],
+      "firstTableName": "User",
+      "firstSchemaName": "public",
+      "firstRelation": "1",
+      "secondFieldNames": [
+        "userId"
+      ],
+      "secondTableName": "UserSocialMedia",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "id"
+      ],
+      "firstTableName": "User",
+      "firstSchemaName": "public",
+      "firstRelation": "1",
+      "secondFieldNames": [
+        "userId"
+      ],
+      "secondTableName": "UserMusic",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "id"
+      ],
+      "firstTableName": "User",
+      "firstSchemaName": "public",
+      "firstRelation": "1",
+      "secondFieldNames": [
+        "userId"
+      ],
+      "secondTableName": "UserChart",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "id"
+      ],
+      "firstTableName": "Chart",
+      "firstSchemaName": "public",
+      "firstRelation": "1",
+      "secondFieldNames": [
+        "chartId"
+      ],
+      "secondTableName": "UserChart",
+      "secondSchemaName": "public",
+      "secondRelation": "*",
+      "checkPoints": []
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+Table User {
+    id int [pk]
+    name varchar
+    email varchar
+    password varchar
+    img url
+    isBandMate boolean
+}
+
+Table UserSocialMedia {
+    userId int [ref: - User.id]
+    socialUrl url
+}
+
+Table UserMusic {
+    userId int [ref: - User.id]
+    musicUrl url
+}
+
+Table Chart {
+    id int [pk]
+    img url
+}
+
+Table UserChart {
+    userId int [ref: - User.id]
+    chartId int [ref: > Chart.id]
+}
