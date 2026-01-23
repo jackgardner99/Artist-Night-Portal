@@ -15,6 +15,7 @@ Table UserSocialMedia {
 Table UserMusic {
     userId int [ref: - User.id]
     musicUrl url
+    platformId int [ref: > Platform.id]
 }
 
 Table Chart {
@@ -25,4 +26,9 @@ Table Chart {
 Table UserChart {
     userId int [ref: - User.id]
     chartId int [ref: > Chart.id]
+}
+
+Table Platform {
+    id int [pk]
+    name varchar
 }

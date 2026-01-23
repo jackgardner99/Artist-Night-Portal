@@ -19,8 +19,8 @@
     {
       "name": "UserMusic",
       "schemaName": "public",
-      "x": 43.193403764204646,
-      "y": 340.28237902976775
+      "x": 18.193403764204646,
+      "y": 285.28237902976775
     },
     {
       "name": "Chart",
@@ -33,6 +33,12 @@
       "schemaName": "public",
       "x": 344.58938827816206,
       "y": 148.17039085659576
+    },
+    {
+      "name": "Platform",
+      "schemaName": "public",
+      "x": 6.575060214920956,
+      "y": 486.28237902976775
     }
   ],
   "tableGroupCollapseStates": [],
@@ -66,6 +72,21 @@
       "secondTableName": "UserMusic",
       "secondSchemaName": "public",
       "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "id"
+      ],
+      "firstTableName": "Platform",
+      "firstSchemaName": "public",
+      "firstRelation": "1",
+      "secondFieldNames": [
+        "platformId"
+      ],
+      "secondTableName": "UserMusic",
+      "secondSchemaName": "public",
+      "secondRelation": "*",
       "checkPoints": []
     },
     {
