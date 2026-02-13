@@ -7,7 +7,7 @@ export const ArtistNavbar = () => {
                 <Link to={'/'}>Artist Night</Link>
             </div>
             <div>
-                <Link>Artist Gallery</Link>
+                <Link to={'/artist-gallery'}>Artist Gallery</Link>
             </div>
             <div>
                 <Link>Profile</Link>

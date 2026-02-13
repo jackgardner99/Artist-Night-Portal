@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export const SignUp = () => {
     return (
         <form>
@@ -5,6 +7,11 @@ export const SignUp = () => {
             <div>Please upload a chart for the Band when you signup</div>
             <div>
                 <input type="image" />
+            </div>
+            <div>
+                <Link to={"/"}>
+                    <button>Submit</button>
+                </Link>
             </div>
         </form>
     )
