@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { getUserById } from "../../services/getUsers"
 
 export const ArtistProfile = () => {
@@ -12,6 +12,11 @@ export const ArtistProfile = () => {
 
     return (
         <div>
+            <div>
+                <Link to={'/artist-gallery'}>
+                    <div>Back to Gallery</div>
+                </Link>
+            </div>
             <h2>
                 {user.name}
             </h2>
