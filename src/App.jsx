@@ -5,6 +5,7 @@ import { Portal } from './components/portal/Portal'
 import { ArtistNavbar } from './components/nav/ArtistNavbar'
 import { SignUp } from './components/portal/SignUp'
 import { ArtistGallery } from './components/gallery/ArtistGallery'
+import { ArtistProfile } from './components/profile/ArtistProfile'
 
 function App() {
   
@@ -19,6 +20,7 @@ function App() {
         <Route index element={<Portal />} />
         <Route path='sign-up' element={<SignUp />} />
         <Route path='artist-gallery' element={<ArtistGallery />} />
+        <Route path='artist-gallery/:userId' element={<ArtistProfile />} />
       </Route>
     </Routes>
   )
