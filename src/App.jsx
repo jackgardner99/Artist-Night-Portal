@@ -1,27 +1,21 @@
 
-import { Outlet, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import { Portal } from './components/portal/Portal'
-import { ArtistNavbar } from './components/nav/ArtistNavbar'
-import { SignUp } from './components/portal/SignUp'
-import { ArtistGallery } from './components/gallery/ArtistGallery'
-import { ArtistProfile } from './components/profile/ArtistProfile'
+import { Authorized } from './components/auth/Authorized'
+import { ApplicationView } from './components/views/ApplicationView'
+import { Login } from './components/auth/Login'
 
 function App() {
   
 
   return (
     <Routes>
-      <Route path='/' element={<>
-        <ArtistNavbar />
-        <Outlet />
-      </>        
-      }>
-        <Route index element={<Portal />} />
-        <Route path='sign-up' element={<SignUp />} />
-        <Route path='artist-gallery' element={<ArtistGallery />} />
-        <Route path='artist-gallery/:userId' element={<ArtistProfile />} />
-      </Route>
+      <Route path='/login' element={<Login />} />
+      <Route path='*' element={
+        <Authorized>
+          <ApplicationView />
+        </Authorized>
+      }></Route>
     </Routes>
   )
 }

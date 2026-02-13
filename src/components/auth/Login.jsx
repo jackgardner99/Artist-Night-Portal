@@ -1,5 +1,29 @@
-export const Login = () => {
+import { useState } from "react"
+import { getUserByEmailAndPassword } from "../../services/getUsers"
+import { useNavigate } from "react-router-dom"
 
+export const Login = () => {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const navigate = useNavigate()
+
+
+    const handleLogin = () => {
+        getUserByEmailAndPassword(email, password).then((foundUser) => {
+            if (foundUser.length === 1) {
+                const artist = foundUser[0]
+                localStorage.setItem(
+                    "artist",
+                    JSON.stringify({
+                        id: artist.id
+                    })
+                )
+                navigate("/")
+            } else {
+                window.alert("Username and/or password is incorrect! Please try again.")
+            }
+        })
+    }
 
     return (
         <main>
@@ -16,6 +40,18 @@ export const Login = () => {
                             placeholder="Email Address"
                             required
                             autoFocus/>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div>
+                            <input 
+                            type="password"
+                            value={password}
+                            onChange={(event) => {setPassword(event.target.value)}}
+                            placeholder="Password"
+                            required
+                            autoFocus
+                             />
                         </div>
                     </fieldset>
                 </form>

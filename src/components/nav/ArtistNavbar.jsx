@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export const ArtistNavbar = () => {
+    const navigate = useNavigate()
+
     return (
         <nav>
             <div>
@@ -13,7 +15,17 @@ export const ArtistNavbar = () => {
                 <Link>Profile</Link>
             </div>
             <div>
-                <Link>Logout</Link>
+                {localStorage.getItem("artist") ? 
+            (<li>
+                <Link to={"/login"} onClick={() => {
+                localStorage.removeItem("artist")
+                navigate("/login", { replace: true })
+            }}
+                    >Logout
+                </Link>
+            </li>) : 
+            ("")
+        }
             </div>
         </nav>
     )
