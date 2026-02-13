@@ -7,7 +7,7 @@ export const Portal = () => {
                 <h1>Artist Night Portal</h1>
             </div>
             <div>
-                <button>Sign Up</button>
+                <Link to={'/sign-up'}><button>Sign Up</button></Link>
             </div>
             <div>
                 Need to book the studio? 
