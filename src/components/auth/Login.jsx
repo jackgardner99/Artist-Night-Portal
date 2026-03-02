@@ -11,14 +11,25 @@ export const Login = () => {
     const handleLogin = () => {
         getUserByEmailAndPassword(email, password).then((foundUser) => {
             if (foundUser.length === 1) {
-                const artist = foundUser[0]
-                localStorage.setItem(
-                    "artist",
-                    JSON.stringify({
-                        id: artist.id
-                    })
-                )
-                navigate("/")
+                if (foundUser[0].isBand === true) {
+                    const bandMember = foundUser[0]
+                    localStorage.setItem(
+                        "bandmember",
+                        JSON.stringify({
+                            id: bandMember.id
+                        })
+                    )
+                    navigate("/")
+                } else {
+                    const artist = foundUser[0]
+                    localStorage.setItem(
+                        "artist",
+                        JSON.stringify({
+                            id: artist.id
+                        })
+                    )
+                    navigate("/")
+                }
             } else {
                 window.alert("Username and/or password is incorrect! Please try again.")
             }
@@ -29,8 +40,8 @@ export const Login = () => {
         <main>
             <section>
                 <form>
-                    <h1>Welcome Manager!</h1>
-                    <h2>Manager Sign In</h2>
+                    <h1>Welcome Artist!</h1>
+                    <h2>Artist Sign In</h2>
                     <fieldset>
                         <div>
                             <input 
