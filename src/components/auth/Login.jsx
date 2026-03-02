@@ -10,28 +10,32 @@ export const Login = () => {
 
     const handleLogin = () => {
         getUserByEmailAndPassword(email, password).then((foundUser) => {
-            if (foundUser.length === 1) {
-                if (foundUser[0].isBand === true) {
-                    const bandMember = foundUser[0]
-                    localStorage.setItem(
-                        "bandmember",
-                        JSON.stringify({
-                            id: bandMember.id
-                        })
-                    )
-                    navigate("/")
+            if(email && password) {
+                if (foundUser.length === 1) {
+                    if (foundUser[0].isBand === true) {
+                        const bandMember = foundUser[0]
+                        localStorage.setItem(
+                            "bandmember",
+                            JSON.stringify({
+                                id: bandMember.id
+                            })
+                        )
+                        navigate("/")
+                    } else {
+                        const artist = foundUser[0]
+                        localStorage.setItem(
+                            "artist",
+                            JSON.stringify({
+                                id: artist.id
+                            })
+                        )
+                        navigate("/")
+                    }
                 } else {
-                    const artist = foundUser[0]
-                    localStorage.setItem(
-                        "artist",
-                        JSON.stringify({
-                            id: artist.id
-                        })
-                    )
-                    navigate("/")
+                    window.alert("Username and/or password is incorrect! Please try again.")
                 }
             } else {
-                window.alert("Username and/or password is incorrect! Please try again.")
+                window.alert("Please make sure all fields are filled out before signing in")
             }
         })
     }
