@@ -9,3 +9,13 @@ export const getUserById = (id) => {
 export const getUserByEmailAndPassword = (email, password) => {
     return fetch(`http://localhost:3000/users?email=${email}&password=${password}`).then(res => res.json())
 }
+
+export const createUser = (user) => {
+    return fetch("http://localhost:3000/users", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(user)
+    })
+}

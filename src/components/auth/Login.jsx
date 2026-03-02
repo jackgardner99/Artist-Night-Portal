@@ -40,8 +40,7 @@ export const Login = () => {
         <main>
             <section>
                 <form>
-                    <h1>Welcome Artist!</h1>
-                    <h2>Artist Sign In</h2>
+                    <h2>Artist Night Sign In</h2>
                     <fieldset>
                         <div>
                             <input 
