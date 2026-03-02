@@ -5,6 +5,8 @@ export const Authorized = ({ children }) => {
 
     if (localStorage.getItem("artist")) {
         return children
+    } else if (localStorage.getItem("bandmember")) {
+        return children
     } else {
         <Navigate to={"/login"} state={{ from: location }} replace />
     }

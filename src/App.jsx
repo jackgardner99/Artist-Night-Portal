@@ -6,8 +6,6 @@ import { ApplicationView } from './components/views/ApplicationView'
 import { Login } from './components/auth/Login'
 
 function App() {
-  
-
   return (
     <Routes>
       <Route path='/login' element={<Login />} />
