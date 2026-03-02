@@ -1,9 +1,4 @@
-import { Outlet, Route, Routes } from "react-router-dom"
-import { ArtistNavbar } from "../nav/ArtistNavbar"
-import { Portal } from "../portal/Portal"
-import { SignUp } from "../portal/SignUp"
-import { ArtistGallery } from "../gallery/ArtistGallery"
-import { ArtistProfile } from "../profile/ArtistProfile"
+
 import { useEffect, useState } from "react"
 import { ArtistView } from "./ArtistView"
 import { BandMateView } from "./BandMateView"

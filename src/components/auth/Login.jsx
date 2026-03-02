@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { getUserByEmailAndPassword } from "../../services/getUsers"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export const Login = () => {
     const [email, setEmail] = useState("")
@@ -72,6 +72,7 @@ export const Login = () => {
                     <button onClick={handleLogin}>Sign In</button>
                 </div>
             </section>
+            <div>New to Artist Night? <Link to={"/register"}>Register!</Link></div>
         </main>
     )
 }

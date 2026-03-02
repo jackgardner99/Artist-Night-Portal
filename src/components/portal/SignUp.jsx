@@ -1,7 +1,16 @@
-import { Link } from "react-router-dom"
 
-export const SignUp = () => {
-    
+import { Link } from "react-router-dom"
+import { uploadToSignupSheet } from "../../services/getSignupSheet"
+
+export const SignUp = ({ artist }) => {
+    const handleSignup = () => {
+        const signup = {
+            userId: artist.id
+        }
+
+        uploadToSignupSheet(signup)
+        window.alert("Thank you for signing up for Artist Night! You are now on the signup list.")
+    }
 
     return (
         <form>
@@ -12,7 +21,7 @@ export const SignUp = () => {
             </div> */}
             <div>
                 <Link to={"/"}>
-                    <button>Submit</button>
+                    <button onClick={handleSignup}>Submit</button>
                 </Link>
             </div>
         </form>
