@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getSignupSheet } from "../../services/getSignupSheet"
+import { deleteFromSignupSheet, getSignupSheet } from "../../services/getSignupSheet"
 
 export const SignUpSheet = ({ bandmember }) => {
     const [signupSheet, setSignupSheet] = useState([])
@@ -7,6 +7,12 @@ export const SignUpSheet = ({ bandmember }) => {
     useEffect(() => {
         getSignupSheet().then(setSignupSheet)
     }, [bandmember])
+
+    const handleDeleteFromSignupSheet = (signupId) => {
+        deleteFromSignupSheet(signupId).then(() => {
+            getSignupSheet().then(setSignupSheet)
+        })
+    }
 
     return (
         <main>
@@ -18,6 +24,11 @@ export const SignUpSheet = ({ bandmember }) => {
                     return (
                         <div>
                             <div>{signup.user?.name}</div>
+                            <div>
+                                <button onClick={() => {
+                                    handleDeleteFromSignupSheet(signup.id)
+                                }}>Delete</button>
+                            </div>
                         </div>
                     )
                 })}

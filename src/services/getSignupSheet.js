@@ -11,3 +11,12 @@ export const uploadToSignupSheet = (signup) => {
         body: JSON.stringify(signup)
     })
 }
+
+export const deleteFromSignupSheet = (id) => {
+    return fetch(`http://localhost:3000/signupSheet/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+}
