@@ -6,7 +6,12 @@ export const Register = () => {
     const [user, setUser] = useState({
         name: "",
         email: "",
-        password: ""
+        password: "",
+        isBand: false,
+        spotifyLink: "",
+        appleMusicLink: "",
+        youtubeLink: "",
+        isHere: false
     })
 
     const navigate = useNavigate()
@@ -43,7 +48,7 @@ export const Register = () => {
 
     const handleRegister = (e) => {
         e.preventDefault()
-        if (user.name && user.email) {
+        if (user.name && user.email && user.password) {
             getUserByEmailAndPassword(user.email, user.password).then((response) => {
             if (response.length > 0) {
                 window.alert("Email and/or password is already in use. Please provide another email and/or password.")
@@ -100,6 +105,48 @@ export const Register = () => {
                                 }}
                                 placeholder="Password"
                                 required
+                                autoFocus
+                                 />
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div>
+                                <input 
+                                type="url"
+                                onChange={(event) => {
+                                    const copy = {...user}
+                                    copy.spotifyLink = event.target.value
+                                    setUser(copy)
+                                }}
+                                placeholder="Spotify Link"
+                                autoFocus
+                                 />
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div>
+                                <input 
+                                type="url"
+                                onChange={(event) => {
+                                    const copy = {...user}
+                                    copy.appleMusicLink = event.target.value
+                                    setUser(copy)
+                                }}
+                                placeholder="Apple Music Link"
+                                autoFocus
+                                 />
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div>
+                                <input 
+                                type="url"
+                                onChange={(event) => {
+                                    const copy = {...user}
+                                    copy.youtubeLink = event.target.value
+                                    setUser(copy)
+                                }}
+                                placeholder="YouTube Link"
                                 autoFocus
                                  />
                             </div>
