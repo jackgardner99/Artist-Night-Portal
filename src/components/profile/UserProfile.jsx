@@ -74,7 +74,8 @@ import { Link } from "react-router-dom"
                             const copy = {...userProfile}
                             copy.spotifyLink = e.target.value
                             setUserProfile(copy)
-                        }}/>
+                        }}
+                        placeholder="Spotify Link"/>
                     </div>
                     <div>
                         <input
@@ -84,7 +85,8 @@ import { Link } from "react-router-dom"
                             const copy = {...userProfile}
                             copy.appleMusicLink = e.target.value
                             setUserProfile(copy)
-                        }}/>
+                        }}
+                        placeholder="Apple Music Link"/>
                     </div>
                     <div>
                         <input
@@ -94,7 +96,8 @@ import { Link } from "react-router-dom"
                             const copy = {...userProfile}
                             copy.youtubeLink = e.target.value
                             setUserProfile(copy)
-                        }}/>
+                        }}
+                        placeholder="YouTube Link"/>
                     </div>
                     <div>
                         <button onClick={handleSaveChanges}>Save Changes</button>  

@@ -4,6 +4,7 @@ import { SignUpSheet } from "../portal/SignUpSheet"
 import { BandNavbar } from "../nav/BandNavbar"
 import { ArtistGallery } from "../gallery/ArtistGallery"
 import { ArtistProfile } from "../profile/ArtistProfile"
+import { UserProfile } from "../profile/UserProfile"
 
 export const BandMateView = ({ bandmember }) => {
     return (
@@ -16,6 +17,7 @@ export const BandMateView = ({ bandmember }) => {
                 <Route index element={<SignUpSheet bandmember={bandmember} />} />
                 <Route path='artist-gallery' element={<ArtistGallery bandmember={bandmember} />} />
                 <Route path='artist-gallery/:userId' element={<ArtistProfile bandmember={bandmember}/>} />
+                <Route path='user-profile' element={<UserProfile id={bandmember.id}/>} />
             </Route>
         </Routes>
     )
