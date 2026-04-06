@@ -10,14 +10,14 @@ export const ArtistGallery = () => {
     }, [])
 
     return (
-        <div>
-            <h2>Artist Gallery</h2>
+        <div className="container">
+            <h2 >Artist Gallery</h2>
             <div>
                 {users.map((user) => {
                     return (
-                        <div>
+                        <div className="signup-list">
                             <Link to={`/artist-gallery/${user.id}`}>
-                                <div>{user.name}</div>
+                                <div className="signup-name">{user.name}</div>
                             </Link>                           
                         </div>
                     )

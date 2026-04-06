@@ -15,15 +15,15 @@ export const SignUpSheet = ({ bandmember }) => {
     }
 
     return (
-        <main>
-            <div>
+        <main className="container">
+            <div className="signup-list-header">
                 <h2>Signup Sheet</h2>
             </div>
-            <div>
+            <div className="signup-list">
                 {signupSheet.map((signup) => {
                     return (
-                        <div>
-                            <div>{signup.user?.name}</div>
+                        <div className="signup-item">
+                            <div className="signup-name">{signup.user?.name}</div>
                             <div>
                                 <button onClick={() => {
                                     handleDeleteFromSignupSheet(signup.id)

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { getUserById, updateUser } from "../../services/getUsers"
-import { Link } from "react-router-dom"
 
  export const UserProfile = ({ id }) => {
     const [userProfile, setUserProfile] = useState({})
@@ -21,33 +20,39 @@ import { Link } from "react-router-dom"
 
     return (
         <div>
-            <h2>
+            <h2 className="form-title">
                 {userProfile.name}
             </h2>
             {!isEditing ? (
-                <div>
+                <div className="form-container">
                     <div>
-                        {userProfile.email}
+                        Email
+                        <div className="form-input">{userProfile.email}</div>
                     </div>
                     <div>
-                        {userProfile.spotifyLink}
+                        Spotify
+                        <div className="form-input">{userProfile.spotifyLink}</div>
                     </div>
                     <div>
-                        {userProfile.appleMusicLink}
+                        Apple Music
+                        <div className="form-input">{userProfile.appleMusicLink}</div>
                     </div>
                     <div>
-                        {userProfile.youtubeLink}
+                        YouTube
+                        <div className="form-input">{userProfile.youtubeLink}</div>
                     </div>
                     <div>
-                        <button onClick={() => {
+                        <button className="btn" onClick={() => {
                             setIsEditing(true)
                         }}>Edit Profile</button>  
                     </div>
                 </div>
             ) : (
-                <div>
+                <div className="form-container">
                     <div>
+                        Artist Name
                         <input
+                        className="form-input"
                         type="text"
                         value={userProfile.name}
                         onChange={(e) => {
@@ -57,7 +62,9 @@ import { Link } from "react-router-dom"
                         }}/>
                     </div>
                     <div>
+                        Email
                         <input
+                        className="form-input"
                         type="email"
                         value={userProfile.email}
                         onChange={(e) => {
@@ -67,7 +74,9 @@ import { Link } from "react-router-dom"
                         }}/>
                     </div>
                     <div>
+                        Spotify
                         <input
+                        className="form-input"
                         type="url"
                         value={userProfile.spotifyLink}
                         onChange={(e) => {
@@ -78,7 +87,9 @@ import { Link } from "react-router-dom"
                         placeholder="Spotify Link"/>
                     </div>
                     <div>
+                        Apple Music
                         <input
+                        className="form-input"
                         type="url"
                         value={userProfile.appleMusicLink}
                         onChange={(e) => {
@@ -89,7 +100,9 @@ import { Link } from "react-router-dom"
                         placeholder="Apple Music Link"/>
                     </div>
                     <div>
+                        YouTube
                         <input
+                        className="form-input"
                         type="url"
                         value={userProfile.youtubeLink}
                         onChange={(e) => {
@@ -100,7 +113,7 @@ import { Link } from "react-router-dom"
                         placeholder="YouTube Link"/>
                     </div>
                     <div>
-                        <button onClick={handleSaveChanges}>Save Changes</button>  
+                        <button className="btn" onClick={handleSaveChanges}>Save Changes</button>  
                     </div>
                 </div>
             )}
