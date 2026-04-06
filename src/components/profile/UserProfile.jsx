@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import { getUserById, updateUser } from "../../services/getUsers"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpotify, faApple, faYoutube } from '@fortawesome/free-brands-svg-icons'
 
  export const UserProfile = ({ id }) => {
     const [userProfile, setUserProfile] = useState({})
@@ -30,17 +32,29 @@ import { getUserById, updateUser } from "../../services/getUsers"
                         <div className="form-input">{userProfile.email}</div>
                     </div>
                     <div>
-                        Spotify
-                        <div className="form-input">{userProfile.spotifyLink}</div>
-                    </div>
-                    <div>
-                        Apple Music
-                        <div className="form-input">{userProfile.appleMusicLink}</div>
-                    </div>
-                    <div>
-                        YouTube
-                        <div className="form-input">{userProfile.youtubeLink}</div>
-                    </div>
+                    {userProfile.spotifyLink ? (
+                        <a href={userProfile.spotifyLink}
+                        className="text-gray-400 hover:text-green-400 transition-colors duration-200">
+                        <FontAwesomeIcon icon={faSpotify} className="h-6 w-6" />
+                    </a>
+                    ) : ""}
+                </div>
+                <div>
+                    {userProfile.appleMusicLink ? (
+                        <a href={userProfile.appleMusicLink}
+                        className="text-gray-400 hover:text-pink-400 transition-colors duration-200">
+                        <FontAwesomeIcon icon={faApple} className="h-6 w-6" />
+                    </a>
+                    ) : ""}
+                </div>
+                <div>
+                    {userProfile.youtubeLink ? (
+                        <a href={userProfile.youtubeLink}
+                            className="text-gray-400 hover:text-red-500 transition-colors duration-200">
+                            <FontAwesomeIcon icon={faYoutube} className="h-6 w-6" />
+                        </a>
+                    ) : ""}
+                </div>
                     <div>
                         <button className="btn" onClick={() => {
                             setIsEditing(true)

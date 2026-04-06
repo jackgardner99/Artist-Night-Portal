@@ -44,7 +44,6 @@ export const ArtistProfile = () => {
                     ) : ""}
                 </div>
                 <div>
-                    YouTube
                     {user.youtubeLink ? (
                         <a href={user.youtubeLink}
                             className="text-gray-400 hover:text-red-500 transition-colors duration-200">
