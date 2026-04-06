@@ -12,7 +12,7 @@ export const ArtistNavbar = () => {
                 <Link to={'/artist-gallery'}>Artist Gallery</Link>
             </div>
             <div>
-                <Link>Profile</Link>
+                <Link to={'/user-profile'}>Profile</Link>
             </div>
             <div>
                 {localStorage.getItem("artist") ? 
