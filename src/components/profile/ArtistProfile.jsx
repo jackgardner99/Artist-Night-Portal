@@ -34,16 +34,12 @@ export const ArtistProfile = () => {
                         <FontAwesomeIcon icon={faSpotify} className="h-6 w-6" />
                     </a>
                     ) : ""}
-                </div>
-                <div>
                     {user.appleMusicLink ? (
                         <a href={user.appleMusicLink}
                         className="text-gray-400 hover:text-pink-400 transition-colors duration-200">
                         <FontAwesomeIcon icon={faApple} className="h-6 w-6" />
                     </a>
                     ) : ""}
-                </div>
-                <div>
                     {user.youtubeLink ? (
                         <a href={user.youtubeLink}
                             className="text-gray-400 hover:text-red-500 transition-colors duration-200">

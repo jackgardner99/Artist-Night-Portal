@@ -38,16 +38,12 @@ import { faSpotify, faApple, faYoutube } from '@fortawesome/free-brands-svg-icon
                         <FontAwesomeIcon icon={faSpotify} className="h-6 w-6" />
                     </a>
                     ) : ""}
-                </div>
-                <div>
                     {userProfile.appleMusicLink ? (
                         <a href={userProfile.appleMusicLink}
                         className="text-gray-400 hover:text-pink-400 transition-colors duration-200">
                         <FontAwesomeIcon icon={faApple} className="h-6 w-6" />
                     </a>
                     ) : ""}
-                </div>
-                <div>
                     {userProfile.youtubeLink ? (
                         <a href={userProfile.youtubeLink}
                             className="text-gray-400 hover:text-red-500 transition-colors duration-200">
@@ -55,6 +51,7 @@ import { faSpotify, faApple, faYoutube } from '@fortawesome/free-brands-svg-icon
                         </a>
                     ) : ""}
                 </div>
+                
                     <div>
                         <button className="btn" onClick={() => {
                             setIsEditing(true)
