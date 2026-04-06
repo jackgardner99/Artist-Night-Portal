@@ -4,6 +4,7 @@ import { Portal } from "../portal/Portal"
 import { SignUp } from "../portal/SignUp"
 import { ArtistGallery } from "../gallery/ArtistGallery"
 import { ArtistProfile } from "../profile/ArtistProfile"
+import { UserProfile } from "../profile/UserProfile"
 
 export const ArtistView = ({ artist }) => {
     return (
@@ -17,6 +18,7 @@ export const ArtistView = ({ artist }) => {
                 <Route path='sign-up' element={<SignUp artist={artist} />} />
                 <Route path='artist-gallery' element={<ArtistGallery artist={artist} />} />
                 <Route path='artist-gallery/:userId' element={<ArtistProfile artist={artist} />} />
+                <Route path='user-profile' element={<UserProfile id={artist.id}/>} />
             </Route>
         </Routes>
     )

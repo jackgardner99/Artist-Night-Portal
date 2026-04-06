@@ -19,3 +19,13 @@ export const createUser = (user) => {
         body: JSON.stringify(user)
     })
 }
+
+export const updateUser = (user) => {
+    return fetch(`http://localhost:3000/users/${user.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(user)
+    })
+}
