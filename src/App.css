@@ -143,6 +143,11 @@ a:hover {
   letter-spacing: -0.5px;
 }
 
+img {
+  width: 230px;
+  height: 100px;
+}
+
 .navbar-brand span {
   color: var(--text-primary);
 }
@@ -343,6 +348,21 @@ a:hover {
   box-shadow: var(--shadow-lg);
 }
 
+.form-container-signin {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  max-width: 540px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  gap: 10px;
+}
+
 .form-title {
   font-size: 1.75rem;
   font-weight: 800;
@@ -353,7 +373,13 @@ a:hover {
 .form-subtitle {
   text-align: center;
   color: var(--text-muted);
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.form-subtitle-register {
+  color: var(--text-muted);
+  margin-bottom: 2px;
   font-size: 0.9rem;
 }
 

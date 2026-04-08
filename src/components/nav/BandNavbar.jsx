@@ -5,6 +5,11 @@ export const BandNavbar = () => {
 
     return (
         <nav className="navbar">
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <Link to={'/'}>
+                    <img src="/photos/BH-Artist-Night-Title_light_with-tag.PNG" alt="Artist Night Logo" />
+                </Link>
+            </div>
             <div className="navbar-links">
                 <div>
                     <Link to={'/'}>Signup Sheet</Link>

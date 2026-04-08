@@ -63,13 +63,16 @@ export const Register = () => {
 
 
     return (
-            <main>
+            <main className="form-container-signin">
                 <section>
                     <form>
-                        <h2>Artist Night Sign UP</h2>
+                        <h2 className="form-title">Welcome New Artist</h2>
+                        <div className="form-subtitle-register">Name *</div>
                         <fieldset>
                             <div>
-                                <input type="text"
+                                <input
+                                className="form-input"
+                                type="text"
                                 onChange={(event) => {
                                     const copy = {...user}
                                     copy.name = event.target.value
@@ -80,9 +83,11 @@ export const Register = () => {
                                 autoFocus />
                             </div>
                         </fieldset>
+                        <div className="form-subtitle-register">Email *</div>
                         <fieldset>
                             <div>
                                 <input 
+                                className="form-input"
                                 type="email" 
                                 onChange={(event) => {
                                     const copy = {...user}
@@ -94,9 +99,11 @@ export const Register = () => {
                                 autoFocus/>
                             </div>
                         </fieldset>
+                        <div className="form-subtitle-register">Password *</div>
                         <fieldset>
                             <div>
-                                <input 
+                                <input
+                                className="form-input" 
                                 type="password"
                                 onChange={(event) => {
                                     const copy = {...user}
@@ -109,9 +116,11 @@ export const Register = () => {
                                  />
                             </div>
                         </fieldset>
+                        <div className="form-subtitle-register">Spotify</div>
                         <fieldset>
                             <div>
                                 <input 
+                                className="form-input"
                                 type="url"
                                 onChange={(event) => {
                                     const copy = {...user}
@@ -123,9 +132,11 @@ export const Register = () => {
                                  />
                             </div>
                         </fieldset>
+                        <div className="form-subtitle-register">Apple Music</div>
                         <fieldset>
                             <div>
                                 <input 
+                                className="form-input"
                                 type="url"
                                 onChange={(event) => {
                                     const copy = {...user}
@@ -137,9 +148,11 @@ export const Register = () => {
                                  />
                             </div>
                         </fieldset>
+                        <div className="form-subtitle-register">YouTube</div>
                         <fieldset>
                             <div>
                                 <input 
+                                className="form-input"
                                 type="url"
                                 onChange={(event) => {
                                     const copy = {...user}
@@ -155,10 +168,10 @@ export const Register = () => {
                 </section>
                 <section>
                     <div>
-                        <button onClick={handleRegister}>Sign In</button>
+                        <button className="btn" onClick={handleRegister}>Register</button>
                     </div>
                 </section>
-                <div>Have an account? <Link to={"/login"}>Login!</Link></div>
+                <div className="form-subtitle">Have an account? <Link to={"/login"}>Login!</Link></div>
             </main>
         )
 }

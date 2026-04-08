@@ -5,6 +5,11 @@ export const ArtistNavbar = () => {
 
     return (
         <nav>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <Link to={'/'}>
+                    <img src="/photos/BH-Artist-Night-Title_light_with-tag.PNG" alt="Artist Night Logo" />
+                </Link>
+            </div>
             <div>
                 <Link to={'/'}>Artist Night</Link>
             </div>

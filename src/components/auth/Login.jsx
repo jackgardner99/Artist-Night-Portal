@@ -41,13 +41,14 @@ export const Login = () => {
     }
 
     return (
-        <main>
+        <main className="form-container-signin">
             <section>
                 <form>
-                    <h2>Artist Night Sign In</h2>
+                    <h2 className="form-title">Artist Night Sign In</h2>
                     <fieldset>
                         <div>
                             <input 
+                            className="form-input"
                             type="email" 
                             value={email} 
                             onChange={(event) => {setEmail(event.target.value)}}
@@ -59,6 +60,7 @@ export const Login = () => {
                     <fieldset>
                         <div>
                             <input 
+                            className="form-input"
                             type="password"
                             value={password}
                             onChange={(event) => {setPassword(event.target.value)}}
@@ -72,10 +74,10 @@ export const Login = () => {
             </section>
             <section>
                 <div>
-                    <button onClick={handleLogin}>Sign In</button>
+                    <button className="btn" onClick={handleLogin}>Sign In</button>
                 </div>
             </section>
-            <div>New to Artist Night? <Link to={"/register"}>Register!</Link></div>
+            <div className="form-subtitle">New to Artist Night? <Link to={"/register"}>Register!</Link></div>
         </main>
     )
 }
