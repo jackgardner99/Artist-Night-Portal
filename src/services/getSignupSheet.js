@@ -1,9 +1,9 @@
 export const getSignupSheet = () => {
-    return fetch("http://localhost:3000/signupSheet?_expand=user").then(res => res.json())
+    return fetch("http://localhost:8000/signup-sheet").then(res => res.json())
 }
 
 export const uploadToSignupSheet = (signup) => {
-    return fetch("http://localhost:3000/signupSheet", {
+    return fetch("http://localhost:8000/signup-sheet", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -13,7 +13,7 @@ export const uploadToSignupSheet = (signup) => {
 }
 
 export const deleteFromSignupSheet = (id) => {
-    return fetch(`http://localhost:3000/signupSheet/${id}`, {
+    return fetch(`http://localhost:8000/signup-sheet/${id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"
