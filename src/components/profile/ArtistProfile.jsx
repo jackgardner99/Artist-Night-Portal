@@ -13,39 +13,38 @@ export const ArtistProfile = () => {
     }, [userId])
 
     return (
-        <div>
-            <div>
-                <Link to={'/artist-gallery'}>
-                    <div>Back to Gallery</div>
-                </Link>
-            </div>
-            <h2>
-                {user.name}
-            </h2>
-            <div className="form-container">
+        <div className="container">
+            <Link to={'/artist-gallery'} className="btn btn-outline btn-sm mt-md">
+                ← Back to Gallery
+            </Link>
+            <div className="profile-header">
+                {user.utilities?.user_image
+                    ? <img className="profile-avatar" src={user.utilities.user_image} alt={user.username} />
+                    : <div className="profile-avatar-placeholder">{user.username?.[0]?.toUpperCase()}</div>
+                }
                 <div>
-                    Email
-                    <div className="form-input">{user.email}</div>
-                </div>
-                <div>
-                    {user.spotifyLink ? (
-                        <a href={user.spotifyLink}
-                        className="text-gray-400 hover:text-green-400 transition-colors duration-200">
-                        <FontAwesomeIcon icon={faSpotify} className="h-6 w-6" />
-                    </a>
-                    ) : ""}
-                    {user.appleMusicLink ? (
-                        <a href={user.appleMusicLink}
-                        className="text-gray-400 hover:text-pink-400 transition-colors duration-200">
-                        <FontAwesomeIcon icon={faApple} className="h-6 w-6" />
-                    </a>
-                    ) : ""}
-                    {user.youtubeLink ? (
-                        <a href={user.youtubeLink}
-                            className="text-gray-400 hover:text-red-500 transition-colors duration-200">
-                            <FontAwesomeIcon icon={faYoutube} className="h-6 w-6" />
-                        </a>
-                    ) : ""}
+                    <h2>
+                        {user.first_name && user.last_name
+                            ? `${user.first_name} ${user.last_name}`
+                            : user.username}
+                    </h2>
+                    <div className="profile-social-links">
+                        {user.utilities?.spotify_link && (
+                            <a href={user.utilities.spotify_link} title="Spotify">
+                                <FontAwesomeIcon icon={faSpotify} />
+                            </a>
+                        )}
+                        {user.utilities?.apple_link && (
+                            <a href={user.utilities.apple_link} title="Apple Music">
+                                <FontAwesomeIcon icon={faApple} />
+                            </a>
+                        )}
+                        {user.utilities?.youtube_link && (
+                            <a href={user.utilities.youtube_link} title="YouTube">
+                                <FontAwesomeIcon icon={faYoutube} />
+                            </a>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

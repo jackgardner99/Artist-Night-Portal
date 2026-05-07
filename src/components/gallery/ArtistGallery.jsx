@@ -11,15 +11,19 @@ export const ArtistGallery = () => {
 
     return (
         <div className="container">
-            <h2 >Artist Gallery</h2>
-            <div>
+            <h2>Artist Gallery</h2>
+            <div className="gallery">
                 {users.map((user) => {
                     return (
-                        <div className="signup-list">
-                            <Link to={`/artist-gallery/${user.id}`}>
-                                <div className="signup-name">{user.name}</div>
-                            </Link>                           
-                        </div>
+                        <Link key={user.id} to={`/artist-gallery/${user.id}`}>
+                            <div className="gallery-card">
+                                {user.utilities?.user_image
+                                    ? <img src={user.utilities.user_image} alt={user.username} />
+                                    : <div className="gallery-card-placeholder" />
+                                }
+                                <div className="signup-name">{user.username}</div>
+                            </div>
+                        </Link>
                     )
                 })}
             </div>
