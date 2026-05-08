@@ -663,12 +663,16 @@ img {
 
 .signup-info {
   flex: 1;
+  min-width: 0;
 }
 
 .signup-name {
   font-weight: 600;
   font-size: 0.95rem;
   color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .signup-meta {
@@ -745,6 +749,30 @@ img {
 .tab-band.active {
   color: var(--band-light);
   border-bottom-color: var(--band);
+}
+
+/* ================================
+   VIDEO
+================================ */
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-bottom: 45%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
 /* ================================
@@ -908,6 +936,56 @@ img {
 .chart-upload-area:hover {
   border-color: var(--accent);
   background: rgba(74, 111, 165, 0.05);
+}
+
+.chart-upload-area.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.existing-charts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.existing-chart-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  width: 100px;
+  overflow: hidden;
+}
+
+.existing-chart-item .text-sm {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+.existing-chart-item img {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+.existing-chart-item:hover {
+  border-color: var(--accent);
+  background: rgba(74, 111, 165, 0.05);
+}
+
+.existing-chart-item.selected {
+  border-color: var(--accent-bright);
+  background: rgba(74, 111, 165, 0.15);
 }
 
 .chart-upload-area input[type="file"] {

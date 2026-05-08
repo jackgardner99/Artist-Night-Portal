@@ -21,7 +21,7 @@ export const ArtistGallery = () => {
                                     ? <img src={user.utilities.user_image} alt={user.username} />
                                     : <div className="gallery-card-placeholder" />
                                 }
-                                <div className="signup-name">{user.username}</div>
+                                <div className="signup-name">{user.first_name} {user.last_name}</div>
                             </div>
                         </Link>
                     )

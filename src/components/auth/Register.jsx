@@ -5,6 +5,8 @@ import { registerUser, getMyProfile } from "../../services/getUsers"
 export const Register = () => {
     const [user, setUser] = useState({
         username: "",
+        first_name: "",
+        last_name: "",
         email: "",
         password: "",
         spotify_link: "",
@@ -54,6 +56,28 @@ export const Register = () => {
                             placeholder="Username"
                             required
                             autoFocus />
+                        </div>
+                    </fieldset>
+                    <div className="form-subtitle-register">First Name</div>
+                    <fieldset>
+                        <div>
+                            <input
+                            className="form-input"
+                            type="text"
+                            value={user.first_name}
+                            onChange={handleChange("first_name")}
+                            placeholder="First Name" />
+                        </div>
+                    </fieldset>
+                    <div className="form-subtitle-register">Last Name</div>
+                    <fieldset>
+                        <div>
+                            <input
+                            className="form-input"
+                            type="text"
+                            value={user.last_name}
+                            onChange={handleChange("last_name")}
+                            placeholder="Last Name" />
                         </div>
                     </fieldset>
                     <div className="form-subtitle-register">Email</div>

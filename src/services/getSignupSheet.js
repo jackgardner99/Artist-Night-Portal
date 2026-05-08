@@ -9,14 +9,14 @@ export const getSignupSheet = async () => {
     return res.json()
 }
 
-export const uploadToSignupSheet = async (chartId) => {
+export const uploadToSignupSheet = async ({ chart, lyrics } = {}) => {
     const res = await fetch("http://localhost:8000/signup-sheet", {
         method: "POST",
         headers: {
             ...authHeader(),
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ chart: chartId })
+        body: JSON.stringify({ ...(chart && { chart }), ...(lyrics && { lyrics }) })
     })
     return res.json()
 }

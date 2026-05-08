@@ -42,10 +42,12 @@ export const SignUpSheet = () => {
                             <div className="signup-info">
                                 <div className="signup-name">{signup.username}</div>
                             </div>
-                            <div className="chart-thumbnail" onClick={() => handleChartClick(signup)}>
-                                {signup.chart_file?.toLowerCase().endsWith(".pdf")
-                                    ? <div className="chart-pdf-badge">PDF</div>
-                                    : <img className="chart-preview" src={signup.chart_file} alt={`${signup.username}'s chart`} />
+                            <div className="chart-thumbnail" onClick={() => signup.chart_file && handleChartClick(signup)}>
+                                {!signup.chart_file
+                                    ? ""
+                                    : signup.chart_file.toLowerCase().endsWith(".pdf")
+                                        ? <div className="chart-pdf-badge">PDF</div>
+                                        : <img className="chart-preview" src={signup.chart_file} alt={`${signup.username}'s chart`} />
                                 }
                             </div>
                             <div>

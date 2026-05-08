@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { getUserById, updateUser } from "../../services/getUsers"
+import { getMyCharts, deleteChart } from "../../services/getCharts"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpotify, faApple, faYoutube } from '@fortawesome/free-brands-svg-icons'
 
@@ -8,9 +9,11 @@ export const UserProfile = ({ id }) => {
     const [isEditing, setIsEditing] = useState(false)
     const [imageFile, setImageFile] = useState(null)
     const [imagePreview, setImagePreview] = useState(null)
+    const [myCharts, setMyCharts] = useState([])
 
     useEffect(() => {
         getUserById(id).then(setUserProfile)
+        getMyCharts().then(setMyCharts)
     }, [id])
 
     const handleImageChange = (e) => {
@@ -27,6 +30,12 @@ export const UserProfile = ({ id }) => {
             setIsEditing(false)
             setImageFile(null)
             setImagePreview(null)
+        })
+    }
+
+    const handleDeleteChart = (chartId) => {
+        deleteChart(chartId).then(() => {
+            setMyCharts(myCharts.filter(c => c.id !== chartId))
         })
     }
 
@@ -134,6 +143,40 @@ export const UserProfile = ({ id }) => {
                     <button className="btn btn-full" onClick={handleSaveChanges}>Save Changes</button>
                 </div>
             )}
+
+            <div className="form-container mt-lg">
+                <h3 className="form-title">My Charts</h3>
+                {myCharts.length === 0
+                    ? <p className="text-muted text-center">No charts uploaded yet.</p>
+                    : (
+                        <div className="signup-list">
+                            {myCharts.map((chart) => {
+                                const isPdf = chart.chart_file?.toLowerCase().endsWith(".pdf")
+                                const fileName = chart.chart_file?.split("/").pop()
+                                return (
+                                    <div key={chart.id} className="signup-item">
+                                        <div className="chart-thumbnail">
+                                            {isPdf
+                                                ? <div className="chart-pdf-badge">PDF</div>
+                                                : <img className="chart-preview" src={chart.chart_file} alt={fileName} />
+                                            }
+                                        </div>
+                                        <div className="signup-info">
+                                            <div className="signup-name">{fileName}</div>
+                                        </div>
+                                        <button
+                                            className="btn btn-danger btn-sm"
+                                            onClick={() => handleDeleteChart(chart.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    )
+                }
+            </div>
         </div>
     )
 }
