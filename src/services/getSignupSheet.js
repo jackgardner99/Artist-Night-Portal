@@ -9,9 +9,29 @@ export const getSignupSheet = async () => {
     return res.json()
 }
 
+export const getMySignupEntry = async () => {
+    const res = await fetch("http://localhost:8000/signup-sheet/mine", {
+        headers: authHeader()
+    })
+    const data = await res.json()
+    return data?.id ? data : null
+}
+
 export const uploadToSignupSheet = async ({ chart, lyrics } = {}) => {
     const res = await fetch("http://localhost:8000/signup-sheet", {
         method: "POST",
+        headers: {
+            ...authHeader(),
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ ...(chart && { chart }), ...(lyrics && { lyrics }) })
+    })
+    return res.json()
+}
+
+export const updateSignupEntry = async (id, { chart, lyrics } = {}) => {
+    const res = await fetch(`http://localhost:8000/signup-sheet/${id}`, {
+        method: "PATCH",
         headers: {
             ...authHeader(),
             "Content-Type": "application/json"
