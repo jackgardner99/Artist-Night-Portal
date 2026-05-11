@@ -1,70 +1,56 @@
 import { useState } from "react"
-import { getUserByEmailAndPassword } from "../../services/getUsers"
+import { loginUser, getMyProfile } from "../../services/getUsers"
 import { Link, useNavigate } from "react-router-dom"
 
 export const Login = () => {
-    const [email, setEmail] = useState("")
+    const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
 
+    const handleLogin = async () => {
+        if (!username || !password) {
+            window.alert("Please make sure all fields are filled out before signing in")
+            return
+        }
 
-    const handleLogin = () => {
-        getUserByEmailAndPassword(email, password).then((foundUser) => {
-            if(email && password) {
-                if (foundUser.length === 1) {
-                    if (foundUser[0].isBand === true) {
-                        const bandMember = foundUser[0]
-                        localStorage.setItem(
-                            "bandmember",
-                            JSON.stringify({
-                                id: bandMember.id
-                            })
-                        )
-                        navigate("/")
-                    } else {
-                        const artist = foundUser[0]
-                        localStorage.setItem(
-                            "artist",
-                            JSON.stringify({
-                                id: artist.id
-                            })
-                        )
-                        navigate("/")
-                    }
-                } else {
-                    window.alert("Username and/or password is incorrect! Please try again.")
-                }
-            } else {
-                window.alert("Please make sure all fields are filled out before signing in")
-            }
-        })
+        const data = await loginUser({ username, password })
+
+        if (data.token) {
+            localStorage.setItem("auth_token", data.token)
+            const profile = await getMyProfile()
+            localStorage.setItem("user", JSON.stringify(profile))
+            navigate("/")
+        } else {
+            window.alert("Username and/or password is incorrect! Please try again.")
+        }
     }
 
     return (
-        <main>
+        <main className="form-container-signin">
             <section>
                 <form>
-                    <h2>Artist Night Sign In</h2>
+                    <h2 className="form-title">Artist Night Sign In</h2>
                     <fieldset>
                         <div>
-                            <input 
-                            type="email" 
-                            value={email} 
-                            onChange={(event) => {setEmail(event.target.value)}}
-                            placeholder="Email Address"
+                            <input
+                            className="form-input"
+                            type="text"
+                            value={username}
+                            onChange={(event) => {setUsername(event.target.value)}}
+                            placeholder="Username"
                             required
                             autoFocus/>
                         </div>
                     </fieldset>
                     <fieldset>
                         <div>
-                            <input 
+                            <input
+                            className="form-input"
                             type="password"
                             value={password}
                             onChange={(event) => {setPassword(event.target.value)}}
                             placeholder="Password"
                             required
-                            autoFocus
                              />
                         </div>
                     </fieldset>
@@ -72,10 +58,10 @@ export const Login = () => {
             </section>
             <section>
                 <div>
-                    <button onClick={handleLogin}>Sign In</button>
+                    <button className="btn" onClick={handleLogin}>Sign In</button>
                 </div>
             </section>
-            <div>New to Artist Night? <Link to={"/register"}>Register!</Link></div>
+            <div className="form-subtitle">New to Artist Night? <Link to={"/register"}>Register!</Link></div>
         </main>
     )
 }
