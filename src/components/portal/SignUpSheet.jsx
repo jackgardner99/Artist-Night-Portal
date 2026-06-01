@@ -11,6 +11,7 @@ export const SignUpSheet = () => {
     }, [])
 
     const handleClearSheet = () => {
+        if (!window.confirm("Are you sure you want to clear the entire signup sheet? This cannot be undone.")) return
         clearSignupSheet().then(() => setSignupSheet([]))
     }
 
@@ -29,6 +30,10 @@ export const SignUpSheet = () => {
         }
     }
 
+    const handleLyricsClick = (signup) => {
+        window.open(signup.lyrics_file, "_blank")
+    }
+
     return (
         <main className="container">
             <div className="signup-list-header">
@@ -40,14 +45,26 @@ export const SignUpSheet = () => {
                     return (
                         <div key={signup.id} className="signup-item">
                             <div className="signup-info">
-                                <div className="signup-name">{signup.username}</div>
+                                <div>
+                                    {signup.user_image
+                                        ? <img className="profile-avatar" src={signup.user_image} alt={signup.username} />
+                                        : ""
+                                    }
+                                </div>
+                                <div className="signup-name">{signup.first_name} {signup.last_name}</div>
                             </div>
                             <div className="chart-thumbnail" onClick={() => signup.chart_file && handleChartClick(signup)}>
                                 {!signup.chart_file
                                     ? ""
                                     : signup.chart_file.toLowerCase().endsWith(".pdf")
-                                        ? <div className="chart-pdf-badge">PDF</div>
+                                        ? <div className="chart-pdf-badge">Chart</div>
                                         : <img className="chart-preview" src={signup.chart_file} alt={`${signup.username}'s chart`} />
+                                }
+                            </div>
+                            <div className="chart-thumbnail" onClick={() => signup.lyrics_file && handleLyricsClick(signup)}>
+                                {signup.lyrics_file
+                                    ? <div className="chart-pdf-badge">Lyrics</div>
+                                    : ""
                                 }
                             </div>
                             <div>
