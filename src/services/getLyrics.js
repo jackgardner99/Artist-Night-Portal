@@ -6,7 +6,7 @@ export const uploadLyrics = async (lyricsFile) => {
     const formData = new FormData()
     formData.append("lyrics_file", lyricsFile)
 
-    const res = await fetch("http://localhost:8000/lyrics", {
+    const res = await fetch("https://artist-night-portal-api-production.up.railway.app/lyrics", {
         method: "POST",
         headers: authHeader(),
         body: formData

@@ -1,5 +1,5 @@
 export const loginUser = async (credentials) => {
-    const res = await fetch("http://localhost:8000/login", {
+    const res = await fetch("https://artist-night-portal-api-production.up.railway.app/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -10,7 +10,7 @@ export const loginUser = async (credentials) => {
 }
 
 export const registerUser = async (userData) => {
-    const res = await fetch("http://localhost:8000/register", {
+    const res = await fetch("https://artist-night-portal-api-production.up.railway.app/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -21,7 +21,7 @@ export const registerUser = async (userData) => {
 }
 
 export const getMyProfile = async () => {
-    const res = await fetch("http://localhost:8000/profiles/me", {
+    const res = await fetch("https://artist-night-portal-api-production.up.railway.app/profiles/me", {
         headers: {
             "Authorization": `Token ${localStorage.getItem("auth_token")}`
         }
@@ -30,7 +30,7 @@ export const getMyProfile = async () => {
 }
 
 export const getUsers = async () => {
-    const res = await fetch("http://localhost:8000/profiles", {
+    const res = await fetch("https://artist-night-portal-api-production.up.railway.app/profiles", {
         headers: {
             "Authorization": `Token ${localStorage.getItem("auth_token")}`
         }
@@ -39,7 +39,7 @@ export const getUsers = async () => {
 }
 
 export const getUserById = async (id) => {
-    const res = await fetch(`http://localhost:8000/profiles/${id}`, {
+    const res = await fetch(`https://artist-night-portal-api-production.up.railway.app/profiles/${id}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("auth_token")}`
         }
@@ -56,7 +56,7 @@ export const updateUser = async (user, imageFile = null) => {
     if (user.utilities?.youtube_link !== undefined) formData.append("youtube_link", user.utilities.youtube_link)
     if (imageFile) formData.append("user_image", imageFile)
 
-    const res = await fetch("http://localhost:8000/profiles/me", {
+    const res = await fetch("https://artist-night-portal-api-production.up.railway.app/profiles/me", {
         method: "PUT",
         headers: {
             "Authorization": `Token ${localStorage.getItem("auth_token")}`
