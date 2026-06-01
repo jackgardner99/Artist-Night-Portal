@@ -11,6 +11,7 @@ export const SignUpSheet = () => {
     }, [])
 
     const handleClearSheet = () => {
+        if (!window.confirm("Are you sure you want to clear the entire signup sheet? This cannot be undone.")) return
         clearSignupSheet().then(() => setSignupSheet([]))
     }
 
