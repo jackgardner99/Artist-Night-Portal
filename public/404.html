@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      const repo = '/Artist-Night-Portal';
+      const path = window.location.pathname.replace(repo, '') || '/';
+      const search = window.location.search;
+      const hash = window.location.hash;
+      window.location.replace(repo + '/?p=' + encodeURIComponent(path + search + hash));
+    </script>
+  </head>
+  <body></body>
+</html>
