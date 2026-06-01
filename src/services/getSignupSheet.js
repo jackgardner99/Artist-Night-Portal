@@ -3,14 +3,14 @@ const authHeader = () => ({
 })
 
 export const getSignupSheet = async () => {
-    const res = await fetch("http://localhost:8000/signup-sheet", {
+    const res = await fetch("https://artist-night-portal-api-production.up.railway.app/signup-sheet", {
         headers: authHeader()
     })
     return res.json()
 }
 
 export const getMySignupEntry = async () => {
-    const res = await fetch("http://localhost:8000/signup-sheet/mine", {
+    const res = await fetch("https://artist-night-portal-api-production.up.railway.app/signup-sheet/mine", {
         headers: authHeader()
     })
     const data = await res.json()
@@ -18,7 +18,7 @@ export const getMySignupEntry = async () => {
 }
 
 export const uploadToSignupSheet = async ({ chart, lyrics } = {}) => {
-    const res = await fetch("http://localhost:8000/signup-sheet", {
+    const res = await fetch("https://artist-night-portal-api-production.up.railway.app/signup-sheet", {
         method: "POST",
         headers: {
             ...authHeader(),
@@ -30,7 +30,7 @@ export const uploadToSignupSheet = async ({ chart, lyrics } = {}) => {
 }
 
 export const updateSignupEntry = async (id, { chart, lyrics } = {}) => {
-    const res = await fetch(`http://localhost:8000/signup-sheet/${id}`, {
+    const res = await fetch(`https://artist-night-portal-api-production.up.railway.app/signup-sheet/${id}`, {
         method: "PATCH",
         headers: {
             ...authHeader(),
@@ -42,7 +42,7 @@ export const updateSignupEntry = async (id, { chart, lyrics } = {}) => {
 }
 
 export const markSignupCompleted = async (id) => {
-    const res = await fetch(`http://localhost:8000/signup-sheet/${id}`, {
+    const res = await fetch(`https://artist-night-portal-api-production.up.railway.app/signup-sheet/${id}`, {
         method: "PATCH",
         headers: {
             ...authHeader(),
@@ -54,14 +54,14 @@ export const markSignupCompleted = async (id) => {
 }
 
 export const clearSignupSheet = async () => {
-    return fetch("http://localhost:8000/signup-sheet/clear", {
+    return fetch("https://artist-night-portal-api-production.up.railway.app/signup-sheet/clear", {
         method: "DELETE",
         headers: authHeader()
     })
 }
 
 export const deleteFromSignupSheet = async (id) => {
-    return fetch(`http://localhost:8000/signup-sheet/${id}`, {
+    return fetch(`https://artist-night-portal-api-production.up.railway.app/signup-sheet/${id}`, {
         method: "DELETE",
         headers: authHeader()
     })
