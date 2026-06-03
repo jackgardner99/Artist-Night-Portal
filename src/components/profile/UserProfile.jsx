@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
-import { getUserById, updateUser } from "../../services/getUsers"
+import { getUserById, updateUser, deleteAccount } from "../../services/getUsers"
 import { getMyCharts, deleteChart } from "../../services/getCharts"
+import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpotify, faApple, faYoutube } from '@fortawesome/free-brands-svg-icons'
 
@@ -10,6 +11,7 @@ export const UserProfile = ({ id }) => {
     const [imageFile, setImageFile] = useState(null)
     const [imagePreview, setImagePreview] = useState(null)
     const [myCharts, setMyCharts] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
         getUserById(id).then(setUserProfile)
@@ -30,6 +32,15 @@ export const UserProfile = ({ id }) => {
             setIsEditing(false)
             setImageFile(null)
             setImagePreview(null)
+        })
+    }
+
+    const handleDeleteAccount = () => {
+        if (!window.confirm("Are you sure you want to delete your account? This cannot be undone.")) return
+        deleteAccount().then(() => {
+            sessionStorage.removeItem("auth_token")
+            sessionStorage.removeItem("user")
+            navigate("/login", { replace: true })
         })
     }
 
@@ -78,6 +89,7 @@ export const UserProfile = ({ id }) => {
                         </div>
                     </div>
                     <button className="btn btn-full mt-md" onClick={() => setIsEditing(true)}>Edit Profile</button>
+                    <button className="btn btn-full mt-md" style={{ background: 'transparent', border: '1px solid var(--error)', color: 'var(--error)' }} onClick={handleDeleteAccount}>Delete Account</button>
                 </div>
             ) : (
                 <div className="form-container">

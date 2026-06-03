@@ -47,6 +47,15 @@ export const getUserById = async (id) => {
     return res.json()
 }
 
+export const deleteAccount = async () => {
+    return fetch("https://artist-night-portal-api-production.up.railway.app/profiles/me", {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Token ${sessionStorage.getItem("auth_token")}`
+        }
+    })
+}
+
 export const updateUser = async (user, imageFile = null) => {
     const formData = new FormData()
     if (user.first_name) formData.append("first_name", user.first_name)
