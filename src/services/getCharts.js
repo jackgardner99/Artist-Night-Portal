@@ -1,9 +1,9 @@
 const authHeader = () => ({
-    "Authorization": `Token ${localStorage.getItem("auth_token")}`
+    "Authorization": `Token ${sessionStorage.getItem("auth_token")}`
 })
 
 export const getMyCharts = async () => {
-    const user = JSON.parse(localStorage.getItem("user"))
+    const user = JSON.parse(sessionStorage.getItem("user"))
     const res = await fetch("https://artist-night-portal-api-production.up.railway.app/charts", {
         headers: authHeader()
     })

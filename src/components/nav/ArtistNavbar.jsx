@@ -15,8 +15,8 @@ export const ArtistNavbar = () => {
                     <li><Link to={'/user-profile'}>Profile</Link></li>
                     <li>
                         <Link to={"/login"} onClick={() => {
-                            localStorage.removeItem("auth_token")
-                            localStorage.removeItem("user")
+                            sessionStorage.removeItem("auth_token")
+                            sessionStorage.removeItem("user")
                             navigate("/login", { replace: true })
                         }}>Logout</Link>
                     </li>
