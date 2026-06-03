@@ -7,7 +7,7 @@ export const ArtistNavbar = () => {
         <nav className="navbar">
             <div className="container flex-between">
                 <Link to={'/'}>
-                    <img src="/photos/BH-Artist-Night-Title_light_with-tag.PNG" alt="Artist Night Logo" />
+                    <img src={`${import.meta.env.BASE_URL}photos/BH-Artist-Night-Title_light_with-tag.PNG`} alt="Artist Night Logo" />
                 </Link>
                 <ul className="navbar-links">
                     <li><Link to={'/'}>Artist Night</Link></li>
