@@ -1,5 +1,5 @@
 const authHeader = () => ({
-    "Authorization": `Token ${localStorage.getItem("auth_token")}`
+    "Authorization": `Token ${sessionStorage.getItem("auth_token")}`
 })
 
 export const getSignupSheet = async () => {

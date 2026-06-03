@@ -16,9 +16,9 @@ export const Login = () => {
         const data = await loginUser({ username, password })
 
         if (data.token) {
-            localStorage.setItem("auth_token", data.token)
+            sessionStorage.setItem("auth_token", data.token)
             const profile = await getMyProfile()
-            localStorage.setItem("user", JSON.stringify(profile))
+            sessionStorage.setItem("user", JSON.stringify(profile))
             navigate("/")
         } else {
             window.alert("Username and/or password is incorrect! Please try again.")

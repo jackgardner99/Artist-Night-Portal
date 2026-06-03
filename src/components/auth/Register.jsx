@@ -26,9 +26,9 @@ export const Register = () => {
         const data = await registerUser(user)
 
         if (data.token) {
-            localStorage.setItem("auth_token", data.token)
+            sessionStorage.setItem("auth_token", data.token)
             const profile = await getMyProfile()
-            localStorage.setItem("user", JSON.stringify(profile))
+            sessionStorage.setItem("user", JSON.stringify(profile))
             navigate("/")
         } else {
             const errorMsg = data.username?.[0] || "Registration failed. Please try again."

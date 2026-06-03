@@ -23,7 +23,7 @@ export const registerUser = async (userData) => {
 export const getMyProfile = async () => {
     const res = await fetch("https://artist-night-portal-api-production.up.railway.app/profiles/me", {
         headers: {
-            "Authorization": `Token ${localStorage.getItem("auth_token")}`
+            "Authorization": `Token ${sessionStorage.getItem("auth_token")}`
         }
     })
     return res.json()
@@ -32,7 +32,7 @@ export const getMyProfile = async () => {
 export const getUsers = async () => {
     const res = await fetch("https://artist-night-portal-api-production.up.railway.app/profiles", {
         headers: {
-            "Authorization": `Token ${localStorage.getItem("auth_token")}`
+            "Authorization": `Token ${sessionStorage.getItem("auth_token")}`
         }
     })
     return res.json()
@@ -41,7 +41,7 @@ export const getUsers = async () => {
 export const getUserById = async (id) => {
     const res = await fetch(`https://artist-night-portal-api-production.up.railway.app/profiles/${id}`, {
         headers: {
-            "Authorization": `Token ${localStorage.getItem("auth_token")}`
+            "Authorization": `Token ${sessionStorage.getItem("auth_token")}`
         }
     })
     return res.json()
@@ -59,7 +59,7 @@ export const updateUser = async (user, imageFile = null) => {
     const res = await fetch("https://artist-night-portal-api-production.up.railway.app/profiles/me", {
         method: "PUT",
         headers: {
-            "Authorization": `Token ${localStorage.getItem("auth_token")}`
+            "Authorization": `Token ${sessionStorage.getItem("auth_token")}`
         },
         body: formData
     })
