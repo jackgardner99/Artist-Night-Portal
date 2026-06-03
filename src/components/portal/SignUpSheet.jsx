@@ -4,6 +4,8 @@ import { getSignupSheet, markSignupCompleted, clearSignupSheet } from "../../ser
 
 export const SignUpSheet = () => {
     const [signupSheet, setSignupSheet] = useState([])
+    const [showCharts, setShowCharts] = useState(true)
+    const [showLyrics, setShowLyrics] = useState(true)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -40,6 +42,24 @@ export const SignUpSheet = () => {
                 <h2>Signup Sheet</h2>
                 <button className="btn btn-danger" onClick={handleClearSheet}>Clear Sheet</button>
             </div>
+            <div className="signup-filter">
+                <label className="filter-checkbox">
+                    <input
+                        type="checkbox"
+                        checked={showCharts}
+                        onChange={(e) => setShowCharts(e.target.checked)}
+                    />
+                    Charts
+                </label>
+                <label className="filter-checkbox">
+                    <input
+                        type="checkbox"
+                        checked={showLyrics}
+                        onChange={(e) => setShowLyrics(e.target.checked)}
+                    />
+                    Lyrics
+                </label>
+            </div>
             <div className="signup-list">
                 {signupSheet.map((signup) => {
                     return (
@@ -53,20 +73,24 @@ export const SignUpSheet = () => {
                                 </div>
                                 <div className="signup-name">{signup.first_name} {signup.last_name}</div>
                             </div>
-                            <div className="chart-thumbnail" onClick={() => signup.chart_file && handleChartClick(signup)}>
-                                {!signup.chart_file
-                                    ? ""
-                                    : signup.chart_file.toLowerCase().endsWith(".pdf")
-                                        ? <div className="chart-pdf-badge">Chart</div>
-                                        : <img className="chart-preview" src={signup.chart_file} alt={`${signup.username}'s chart`} />
-                                }
-                            </div>
-                            <div className="chart-thumbnail" onClick={() => signup.lyrics_file && handleLyricsClick(signup)}>
-                                {signup.lyrics_file
-                                    ? <div className="chart-pdf-badge">Lyrics</div>
-                                    : ""
-                                }
-                            </div>
+                            {showCharts && (
+                                <div className="chart-thumbnail" onClick={() => signup.chart_file && handleChartClick(signup)}>
+                                    {!signup.chart_file
+                                        ? ""
+                                        : signup.chart_file.toLowerCase().endsWith(".pdf")
+                                            ? <div className="chart-pdf-badge">Chart</div>
+                                            : <img className="chart-preview" src={signup.chart_file} alt={`${signup.username}'s chart`} />
+                                    }
+                                </div>
+                            )}
+                            {showLyrics && (
+                                <div className="chart-thumbnail" onClick={() => signup.lyrics_file && handleLyricsClick(signup)}>
+                                    {signup.lyrics_file
+                                        ? <div className="chart-pdf-badge">Lyrics</div>
+                                        : ""
+                                    }
+                                </div>
+                            )}
                             <div>
                                 <button
                                     className="btn btn-sm"
