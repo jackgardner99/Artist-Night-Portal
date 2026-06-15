@@ -62,6 +62,7 @@ export const Login = () => {
                 </div>
             </section>
             <div className="form-subtitle">New to Artist Night? <Link to={"/register"}>Register!</Link></div>
+            <div className="form-subtitle"><Link to={"/guest-signup"}>Sign up without an account</Link></div>
         </main>
     )
 }
