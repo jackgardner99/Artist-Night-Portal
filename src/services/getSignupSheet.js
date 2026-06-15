@@ -66,3 +66,17 @@ export const deleteFromSignupSheet = async (id) => {
         headers: authHeader()
     })
 }
+
+export const guestSignup = async ({ firstName, lastName, chartFile, lyricsFile }) => {
+    const formData = new FormData()
+    formData.append("first_name", firstName)
+    if (lastName) formData.append("last_name", lastName)
+    if (chartFile) formData.append("chart_file", chartFile)
+    if (lyricsFile) formData.append("lyrics_file", lyricsFile)
+
+    const res = await fetch("https://artist-night-portal-api-production.up.railway.app/guest-signup", {
+        method: "POST",
+        body: formData
+    })
+    return res.json()
+}
