@@ -88,6 +88,7 @@ export const Register = () => {
                             type="email"
                             value={user.email}
                             onChange={handleChange("email")}
+                            required
                             placeholder="Email Address" />
                         </div>
                     </fieldset>

@@ -19,7 +19,10 @@ export const SignUpSheet = () => {
 
     const handleCompleted = (signupId) => {
         markSignupCompleted(signupId).then(() => {
-            getSignupSheet().then(setSignupSheet)
+            getSignupSheet().then((data) => {
+                const sorted = [...data].sort((a, b) => Number(a.completed) - Number(b.completed))
+                setSignupSheet(sorted)
+            })
         })
     }
 
