@@ -844,6 +844,17 @@ a:hover {
 /* ================================
    GALLERY
 ================================ */
+.gallery-section-heading {
+  margin: 1.5rem 0 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.gallery-section:first-of-type .gallery-section-heading {
+  margin-top: 0.5rem;
+}
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
