@@ -11,7 +11,8 @@ export const Register = () => {
         password: "",
         spotify_link: "",
         apple_link: "",
-        youtube_link: ""
+        youtube_link: "",
+        marketing_opt_in: false
     })
 
     const navigate = useNavigate()
@@ -31,7 +32,7 @@ export const Register = () => {
             sessionStorage.setItem("user", JSON.stringify(profile))
             navigate("/")
         } else {
-            const errorMsg = data.username?.[0] || "Registration failed. Please try again."
+            const errorMsg = data.username?.[0] || data.email?.[0] || "Registration failed. Please try again."
             window.alert(errorMsg)
         }
     }
@@ -136,6 +137,15 @@ export const Register = () => {
                             onChange={handleChange("youtube_link")}
                             placeholder="YouTube Link" />
                         </div>
+                    </fieldset>
+                    <fieldset>
+                        <label className="filter-checkbox">
+                            <input
+                            type="checkbox"
+                            checked={user.marketing_opt_in}
+                            onChange={(e) => setUser({ ...user, marketing_opt_in: e.target.checked })} />
+                            Email me about upcoming Artist Nights
+                        </label>
                     </fieldset>
                 </form>
             </section>
