@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
-import { getUserById, updateUser, deleteAccount } from "../../services/getUsers"
+import { getMyProfile, updateUser, deleteAccount } from "../../services/getUsers"
 import { getMyCharts, deleteChart } from "../../services/getCharts"
+import { resizeImage } from "../../services/resizeImage"
 import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpotify, faApple, faYoutube } from '@fortawesome/free-brands-svg-icons'
@@ -11,28 +12,36 @@ export const UserProfile = ({ id }) => {
     const [imageFile, setImageFile] = useState(null)
     const [imagePreview, setImagePreview] = useState(null)
     const [myCharts, setMyCharts] = useState([])
+    const [isSaving, setIsSaving] = useState(false)
+    const [saveError, setSaveError] = useState("")
     const navigate = useNavigate()
 
     useEffect(() => {
-        getUserById(id).then(setUserProfile)
+        getMyProfile().then(setUserProfile)
         getMyCharts().then(setMyCharts)
     }, [id])
 
-    const handleImageChange = (e) => {
+    const handleImageChange = async (e) => {
         const file = e.target.files[0]
         if (file) {
-            setImageFile(file)
-            setImagePreview(URL.createObjectURL(file))
+            const resized = await resizeImage(file)
+            setImageFile(resized)
+            setImagePreview(URL.createObjectURL(resized))
         }
     }
 
     const handleSaveChanges = () => {
-        updateUser(userProfile, imageFile).then(() => {
-            getUserById(id).then(setUserProfile)
-            setIsEditing(false)
-            setImageFile(null)
-            setImagePreview(null)
-        })
+        setIsSaving(true)
+        setSaveError("")
+        updateUser(userProfile, imageFile)
+            .then(() => {
+                getMyProfile().then(setUserProfile)
+                setIsEditing(false)
+                setImageFile(null)
+                setImagePreview(null)
+            })
+            .catch(() => setSaveError("Your changes didn't save. Check your connection and try again."))
+            .finally(() => setIsSaving(false))
     }
 
     const handleDeleteAccount = () => {
@@ -152,7 +161,19 @@ export const UserProfile = ({ id }) => {
                             onChange={handleUtilitiesChange("youtube_link")}
                             placeholder="YouTube Link" />
                     </div>
-                    <button className="btn btn-full" onClick={handleSaveChanges}>Save Changes</button>
+                    <div className="form-group">
+                        <label className="filter-checkbox">
+                            <input
+                                type="checkbox"
+                                checked={!!userProfile.utilities?.marketing_opt_in}
+                                onChange={(e) => setUserProfile({ ...userProfile, utilities: { ...userProfile.utilities, marketing_opt_in: e.target.checked } })} />
+                            Email me about upcoming Artist Nights
+                        </label>
+                    </div>
+                    {saveError && <div className="alert alert-error">{saveError}</div>}
+                    <button className="btn btn-full" onClick={handleSaveChanges} disabled={isSaving}>
+                        {isSaving ? "Saving..." : "Save Changes"}
+                    </button>
                 </div>
             )}
 

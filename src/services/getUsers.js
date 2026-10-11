@@ -63,6 +63,7 @@ export const updateUser = async (user, imageFile = null) => {
     if (user.utilities?.spotify_link !== undefined) formData.append("spotify_link", user.utilities.spotify_link)
     if (user.utilities?.apple_link !== undefined) formData.append("apple_link", user.utilities.apple_link)
     if (user.utilities?.youtube_link !== undefined) formData.append("youtube_link", user.utilities.youtube_link)
+    if (user.utilities?.marketing_opt_in !== undefined) formData.append("marketing_opt_in", user.utilities.marketing_opt_in ? "true" : "false")
     if (imageFile) formData.append("user_image", imageFile)
 
     const res = await fetch("https://artist-night-portal-api-production.up.railway.app/profiles/me", {
@@ -72,5 +73,6 @@ export const updateUser = async (user, imageFile = null) => {
         },
         body: formData
     })
+    if (!res.ok) throw new Error(`Profile update failed (${res.status})`)
     return res.json()
 }
