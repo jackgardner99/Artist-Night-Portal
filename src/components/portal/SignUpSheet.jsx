@@ -10,6 +10,13 @@ const formatSignupTime = (iso) => {
     return `${day} ${time}`
 }
 
+// Not-yet-played first, then completed; each group in signup order
+const sortSignups = (signups) =>
+    [...signups].sort((a, b) =>
+        Number(a.completed) - Number(b.completed)
+        || new Date(a.signed_up_at) - new Date(b.signed_up_at)
+    )
+
 export const SignUpSheet = () => {
     const [signupSheet, setSignupSheet] = useState([])
     const [showCharts, setShowCharts] = useState(true)
@@ -17,7 +24,7 @@ export const SignUpSheet = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        getSignupSheet().then(setSignupSheet)
+        getSignupSheet().then((data) => setSignupSheet(sortSignups(data)))
     }, [])
 
     const handleClearSheet = () => {
@@ -27,10 +34,7 @@ export const SignUpSheet = () => {
 
     const handleCompleted = (signupId) => {
         markSignupCompleted(signupId).then(() => {
-            getSignupSheet().then((data) => {
-                const sorted = [...data].sort((a, b) => Number(a.completed) - Number(b.completed))
-                setSignupSheet(sorted)
-            })
+            getSignupSheet().then((data) => setSignupSheet(sortSignups(data)))
         })
     }
 
