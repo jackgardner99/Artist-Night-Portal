@@ -2,6 +2,14 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { getSignupSheet, markSignupCompleted, clearSignupSheet } from "../../services/getSignupSheet"
 
+// e.g. 10/11/2026 7:30 PM, in the viewer's local time
+const formatSignupTime = (iso) => {
+    const date = new Date(iso)
+    const day = date.toLocaleDateString("en-US", { month: "2-digit", day: "2-digit", year: "numeric" })
+    const time = date.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })
+    return `${day} ${time}`
+}
+
 export const SignUpSheet = () => {
     const [signupSheet, setSignupSheet] = useState([])
     const [showCharts, setShowCharts] = useState(true)
@@ -75,6 +83,9 @@ export const SignUpSheet = () => {
                                     }
                                 </div>
                                 <div className="signup-name">{signup.first_name} {signup.last_name}</div>
+                                {signup.signed_up_at && (
+                                    <div className="signup-meta">{formatSignupTime(signup.signed_up_at)}</div>
+                                )}
                             </div>
                             {showCharts && (
                                 <div className="chart-thumbnail" onClick={() => signup.chart_file && handleChartClick(signup)}>

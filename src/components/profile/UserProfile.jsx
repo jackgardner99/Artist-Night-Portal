@@ -78,6 +78,11 @@ export const UserProfile = ({ id }) => {
                                     ? `${userProfile.first_name} ${userProfile.last_name}`
                                     : userProfile.username}
                             </h2>
+                            {userProfile.utilities && (
+                                <div className="text-secondary">
+                                    Open mic signups: {userProfile.utilities.signup_count ?? 0}
+                                </div>
+                            )}
                             <div className="profile-social-links">
                                 {userProfile.utilities?.spotify_link && (
                                     <a href={userProfile.utilities.spotify_link} title="Spotify">
