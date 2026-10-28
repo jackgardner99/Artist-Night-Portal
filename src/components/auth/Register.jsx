@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { registerUser, getMyProfile } from "../../services/getUsers"
+import { SOCIAL_LINKS } from "../profile/socialLinks"
 
 export const Register = () => {
     const [user, setUser] = useState({
@@ -9,9 +10,7 @@ export const Register = () => {
         last_name: "",
         email: "",
         password: "",
-        spotify_link: "",
-        apple_link: "",
-        youtube_link: "",
+        ...Object.fromEntries(SOCIAL_LINKS.map(({ field }) => [field, ""])),
         marketing_opt_in: false
     })
 
@@ -32,7 +31,10 @@ export const Register = () => {
             sessionStorage.setItem("user", JSON.stringify(profile))
             navigate("/")
         } else {
-            const errorMsg = data.username?.[0] || data.email?.[0] || "Registration failed. Please try again."
+            const badLink = SOCIAL_LINKS.find(({ field }) => data[field])
+            const errorMsg = data.username?.[0] || data.email?.[0]
+                || (badLink && `${badLink.label}: ${data[badLink.field][0]}`)
+                || "Registration failed. Please try again."
             window.alert(errorMsg)
         }
     }
@@ -105,39 +107,21 @@ export const Register = () => {
                             required />
                         </div>
                     </fieldset>
-                    <div className="form-subtitle-register">Spotify</div>
-                    <fieldset>
-                        <div>
-                            <input
-                            className="form-input"
-                            type="url"
-                            value={user.spotify_link}
-                            onChange={handleChange("spotify_link")}
-                            placeholder="Spotify Link" />
+                    {SOCIAL_LINKS.map(({ field, label }) => (
+                        <div key={field}>
+                            <div className="form-subtitle-register">{label}</div>
+                            <fieldset>
+                                <div>
+                                    <input
+                                    className="form-input"
+                                    type="url"
+                                    value={user[field]}
+                                    onChange={handleChange(field)}
+                                    placeholder={`${label} Link`} />
+                                </div>
+                            </fieldset>
                         </div>
-                    </fieldset>
-                    <div className="form-subtitle-register">Apple Music</div>
-                    <fieldset>
-                        <div>
-                            <input
-                            className="form-input"
-                            type="url"
-                            value={user.apple_link}
-                            onChange={handleChange("apple_link")}
-                            placeholder="Apple Music Link" />
-                        </div>
-                    </fieldset>
-                    <div className="form-subtitle-register">YouTube</div>
-                    <fieldset>
-                        <div>
-                            <input
-                            className="form-input"
-                            type="url"
-                            value={user.youtube_link}
-                            onChange={handleChange("youtube_link")}
-                            placeholder="YouTube Link" />
-                        </div>
-                    </fieldset>
+                    ))}
                     <fieldset>
                         <label className="filter-checkbox">
                             <input

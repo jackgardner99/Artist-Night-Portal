@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { getUserById } from "../../services/getUsers"
+import { RecordBadge } from "./RecordBadge"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpotify, faApple, faYoutube } from '@fortawesome/free-brands-svg-icons'
+import { SOCIAL_LINKS } from "./socialLinks"
 
 export const ArtistProfile = () => {
     const [user, setUser] = useState({})
@@ -28,22 +29,15 @@ export const ArtistProfile = () => {
                             ? `${user.first_name} ${user.last_name}`
                             : user.username}
                     </h2>
+                    {user.utilities && (
+                        <RecordBadge count={user.utilities.signup_count ?? 0} />
+                    )}
                     <div className="profile-social-links">
-                        {user.utilities?.spotify_link && (
-                            <a href={user.utilities.spotify_link} title="Spotify">
-                                <FontAwesomeIcon icon={faSpotify} />
+                        {SOCIAL_LINKS.map(({ field, label, icon }) => user.utilities?.[field] && (
+                            <a key={field} href={user.utilities[field]} title={label}>
+                                <FontAwesomeIcon icon={icon} />
                             </a>
-                        )}
-                        {user.utilities?.apple_link && (
-                            <a href={user.utilities.apple_link} title="Apple Music">
-                                <FontAwesomeIcon icon={faApple} />
-                            </a>
-                        )}
-                        {user.utilities?.youtube_link && (
-                            <a href={user.utilities.youtube_link} title="YouTube">
-                                <FontAwesomeIcon icon={faYoutube} />
-                            </a>
-                        )}
+                        ))}
                     </div>
                 </div>
             </div>

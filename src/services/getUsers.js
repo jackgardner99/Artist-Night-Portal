@@ -1,3 +1,5 @@
+import { SOCIAL_LINKS } from "../components/profile/socialLinks"
+
 export const loginUser = async (credentials) => {
     const res = await fetch("https://artist-night-portal-api-production.up.railway.app/login", {
         method: "POST",
@@ -60,9 +62,9 @@ export const updateUser = async (user, imageFile = null) => {
     const formData = new FormData()
     if (user.first_name) formData.append("first_name", user.first_name)
     if (user.last_name) formData.append("last_name", user.last_name)
-    if (user.utilities?.spotify_link !== undefined) formData.append("spotify_link", user.utilities.spotify_link)
-    if (user.utilities?.apple_link !== undefined) formData.append("apple_link", user.utilities.apple_link)
-    if (user.utilities?.youtube_link !== undefined) formData.append("youtube_link", user.utilities.youtube_link)
+    SOCIAL_LINKS.forEach(({ field }) => {
+        if (user.utilities?.[field] !== undefined) formData.append(field, user.utilities[field])
+    })
     if (user.utilities?.marketing_opt_in !== undefined) formData.append("marketing_opt_in", user.utilities.marketing_opt_in ? "true" : "false")
     if (imageFile) formData.append("user_image", imageFile)
 
@@ -73,6 +75,11 @@ export const updateUser = async (user, imageFile = null) => {
         },
         body: formData
     })
-    if (!res.ok) throw new Error(`Profile update failed (${res.status})`)
+    if (!res.ok) {
+        const error = new Error(`Profile update failed (${res.status})`)
+        // 400s carry per-field messages, e.g. { instagram_link: ["Enter a valid URL."] }
+        if (res.status === 400) error.fieldErrors = await res.json().catch(() => null)
+        throw error
+    }
     return res.json()
 }

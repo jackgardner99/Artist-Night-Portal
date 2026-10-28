@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { getSignupSheet, markSignupCompleted, clearSignupSheet } from "../../services/getSignupSheet"
+import { RecordBadge } from "../profile/RecordBadge"
 
 // e.g. 10/11/2026 7:30 PM, in the viewer's local time
 const formatSignupTime = (iso) => {
@@ -87,6 +88,7 @@ export const SignUpSheet = () => {
                                     }
                                 </div>
                                 <div className="signup-name">{signup.first_name} {signup.last_name}</div>
+                                <RecordBadge compact count={signup.signup_count ?? 0} />
                                 {signup.signed_up_at && (
                                     <div className="signup-meta">{formatSignupTime(signup.signed_up_at)}</div>
                                 )}

@@ -3,8 +3,9 @@ import { getMyProfile, updateUser, deleteAccount } from "../../services/getUsers
 import { getMyCharts, deleteChart } from "../../services/getCharts"
 import { resizeImage } from "../../services/resizeImage"
 import { useNavigate } from "react-router-dom"
+import { RecordBadge } from "./RecordBadge"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpotify, faApple, faYoutube } from '@fortawesome/free-brands-svg-icons'
+import { SOCIAL_LINKS } from "./socialLinks"
 
 export const UserProfile = ({ id }) => {
     const [userProfile, setUserProfile] = useState({})
@@ -40,7 +41,15 @@ export const UserProfile = ({ id }) => {
                 setImageFile(null)
                 setImagePreview(null)
             })
-            .catch(() => setSaveError("Your changes didn't save. Check your connection and try again."))
+            .catch((err) => {
+                const fieldErrors = Object.entries(err.fieldErrors || {})
+                if (fieldErrors.length) {
+                    const labelFor = (field) => SOCIAL_LINKS.find((link) => link.field === field)?.label || field
+                    setSaveError(fieldErrors.map(([field, msgs]) => `${labelFor(field)}: ${[].concat(msgs).join(" ")}`).join(" "))
+                } else {
+                    setSaveError("Your changes didn't save. Check your connection and try again.")
+                }
+            })
             .finally(() => setIsSaving(false))
     }
 
@@ -79,26 +88,14 @@ export const UserProfile = ({ id }) => {
                                     : userProfile.username}
                             </h2>
                             {userProfile.utilities && (
-                                <div className="text-secondary">
-                                    Open mic signups: {userProfile.utilities.signup_count ?? 0}
-                                </div>
+                                <RecordBadge count={userProfile.utilities.signup_count ?? 0} />
                             )}
                             <div className="profile-social-links">
-                                {userProfile.utilities?.spotify_link && (
-                                    <a href={userProfile.utilities.spotify_link} title="Spotify">
-                                        <FontAwesomeIcon icon={faSpotify} />
+                                {SOCIAL_LINKS.map(({ field, label, icon }) => userProfile.utilities?.[field] && (
+                                    <a key={field} href={userProfile.utilities[field]} title={label}>
+                                        <FontAwesomeIcon icon={icon} />
                                     </a>
-                                )}
-                                {userProfile.utilities?.apple_link && (
-                                    <a href={userProfile.utilities.apple_link} title="Apple Music">
-                                        <FontAwesomeIcon icon={faApple} />
-                                    </a>
-                                )}
-                                {userProfile.utilities?.youtube_link && (
-                                    <a href={userProfile.utilities.youtube_link} title="YouTube">
-                                        <FontAwesomeIcon icon={faYoutube} />
-                                    </a>
-                                )}
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -139,33 +136,17 @@ export const UserProfile = ({ id }) => {
                             value={userProfile.last_name || ""}
                             onChange={(e) => setUserProfile({ ...userProfile, last_name: e.target.value })} />
                     </div>
-                    <div className="form-group">
-                        <label className="form-label">Spotify</label>
-                        <input
-                            className="form-input"
-                            type="url"
-                            value={userProfile.utilities?.spotify_link || ""}
-                            onChange={handleUtilitiesChange("spotify_link")}
-                            placeholder="Spotify Link" />
-                    </div>
-                    <div className="form-group">
-                        <label className="form-label">Apple Music</label>
-                        <input
-                            className="form-input"
-                            type="url"
-                            value={userProfile.utilities?.apple_link || ""}
-                            onChange={handleUtilitiesChange("apple_link")}
-                            placeholder="Apple Music Link" />
-                    </div>
-                    <div className="form-group">
-                        <label className="form-label">YouTube</label>
-                        <input
-                            className="form-input"
-                            type="url"
-                            value={userProfile.utilities?.youtube_link || ""}
-                            onChange={handleUtilitiesChange("youtube_link")}
-                            placeholder="YouTube Link" />
-                    </div>
+                    {SOCIAL_LINKS.map(({ field, label }) => (
+                        <div key={field} className="form-group">
+                            <label className="form-label">{label}</label>
+                            <input
+                                className="form-input"
+                                type="url"
+                                value={userProfile.utilities?.[field] || ""}
+                                onChange={handleUtilitiesChange(field)}
+                                placeholder={`${label} Link`} />
+                        </div>
+                    ))}
                     <div className="form-group">
                         <label className="filter-checkbox">
                             <input
