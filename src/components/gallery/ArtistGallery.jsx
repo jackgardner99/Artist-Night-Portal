@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { getUsers } from "../../services/getUsers"
 import { Link } from "react-router-dom"
+import { RecordBadge } from "../profile/RecordBadge"
 
 export const ArtistGallery = () => {
     const [users, setUsers] = useState([])
@@ -34,6 +35,7 @@ export const ArtistGallery = () => {
                                             : <div className="gallery-card-placeholder" />
                                         }
                                         <div className="signup-name">{user.first_name} {user.last_name}</div>
+                                        <RecordBadge compact count={user.utilities?.signup_count ?? 0} />
                                     </div>
                                 </Link>
                             )
