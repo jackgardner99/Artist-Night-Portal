@@ -1126,6 +1126,18 @@ a:hover {
 /* ================================
    FOOTER
 ================================ */
+/* Keeps the footer at the bottom of the screen on short pages */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.app-main {
+  flex: 1;
+}
+
 .footer {
   background: var(--primary);
   border-top: 1px solid var(--border);
@@ -1134,6 +1146,15 @@ a:hover {
   color: var(--text-muted);
   font-size: 0.85rem;
   margin-top: auto;
+}
+
+.footer a {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.footer a:hover {
+  color: var(--accent-bright);
 }
 
 /* ================================
